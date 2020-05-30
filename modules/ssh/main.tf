@@ -4,6 +4,6 @@ resource "digitalocean_firewall" "ssh-22" {
   inbound_rule {
     protocol         = var.rules.ssh.protocol
     port_range       = var.rules.ssh.port
-    source_addresses = split(",", var.rules.ssh.source_addresses)
+    source_addresses = length(var.source_addresses) == 0 ? split(",", var.rules.ssh.source_addresses) : var.source_addresses
   }
 }
